@@ -1,0 +1,142 @@
+$formBorder: 1px solid $tertiaryColor;
+$formBorderRadius: 0;
+$formPadding: 0.625em;
+$labelSize: 0.8125em;
+
+form {
+	margin: 0;
+	padding: 0;
+}
+input, label, textarea, select {
+	display: block;
+	width: 100%;
+}
+label {
+	font-size: $labelSize;
+	font-weight: 600;
+}
+input, textarea, select {
+	border: $formBorder;
+	border-radius: $formBorderRadius;
+	margin: 0;
+	padding: $formPadding;
+	@include placeholder {
+		color: lighten($primaryColor, 10%);
+		font-size: relSize(12, 16);
+	};
+	&:active, &:focus {
+		outline: none;
+	}
+	&:active {
+		font-size: 16px;
+	}
+}
+textarea {
+	height: 150px;
+}
+input[type='checkbox'], input[type='radio'] {
+	border-radius: 0;
+	display: inline-block;
+	height: 15px;
+	left: 0;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 15px;
+	~ label {
+		padding-left: 1.5625em;
+		//TODO add checkbox using psuedo
+	}
+}
+button {
+	border: none;
+	border-radius: 0;
+	margin: 0;
+	@extend .btn;
+	@extend .btn--standard;
+}
+input[type="submit"] {
+	border: none;
+	transition: all ease-in 0.2s;
+	width: auto;
+	@extend .btn;
+	@extend .btn--standard;
+}
+
+.form {
+	margin-bottom: 0;
+    padding: 0;
+    &--fancy {
+        input:not([type="submit"]), textarea {
+            background-color: transparent;
+            position: relative;
+            z-index: 2;
+            &:active, &:focus, &.hasval {
+                border-color: $tertiaryColor;
+                ~ label {
+                    color: $primaryColor;
+                    top: 0;
+                    z-index: 2;
+                }
+            }
+        }
+        label {
+            background-color: $tertiaryColor;
+            color: $secondaryColor;
+            font-weight: 400;
+            left: relSize(10, 16);
+            padding: 0 relSize(10, 16);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all ease-in 0.2s;
+            width: auto;
+		}
+		select, textarea {
+			~ label {
+				top: 0;
+			}
+		}
+    }
+    &__row {
+        margin-bottom: relSize(20, 16);
+		position: relative;
+		&--singleField {
+			position: relative;
+			> input[type="text"] {
+				padding-bottom: relSize(12, 16);
+				padding-top: relSize(12, 16);
+				padding-right: relSize(100, 16);
+			}
+
+			input[type="submit"] {
+				bottom: 0;
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
+		}
+    }
+}
+
+.validateErrorRow {
+	background-color: $errorcolor;
+	color: $secondaryColor;
+	font-size: 0.8125em;
+	font-weight: 600;
+	left: 0;
+	line-height: 1em;
+	padding: 0.3846153846153846em;
+	position: absolute;
+	top: 100%;
+	z-index: 1;
+	&::before {
+		border-bottom: 5px solid $errorcolor;
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		content: "";
+		left: 5px;
+		position: absolute;
+		top: -5px;
+	}
+}
